@@ -1,0 +1,11 @@
+{
+  "name": "underscore-partials",
+  "version": "1.0.0",
+  "main": "underscore-partials.js",
+  "dependencies": {
+    "underscore": "*"
+  },
+  "devDependencies": {
+    "jasmine": "*"
+  }
+}

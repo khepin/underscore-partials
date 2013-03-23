@@ -1,3 +1,5 @@
+Travis status: [![Build Status](https://travis-ci.org/khepin/underscore-partials.png?branch=master)](https://travis-ci.org/khepin/underscore-partials)
+
 # Allows you to use partial templates within Underscore templates
 
 This lets you define some templates that can be used within other templates.

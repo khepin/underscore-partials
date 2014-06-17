@@ -12,8 +12,8 @@
             }
         };
 
-        mixin.partial.declare = function(name, template) {
-            partialCache[name] = _.template(template);
+        mixin.partial.declare = function(name, template, templateSettings) {
+            partialCache[name] = _.template(template, undefined, templateSettings);
         };
 
         mixin.partial.exists = function(name) {

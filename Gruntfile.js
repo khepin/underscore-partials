@@ -21,7 +21,7 @@ module.exports = function(grunt) {
         src : 'underscore-partials.js',
         options: {
           specs: 'specs/specs.js',
-          vendor: 'components/underscore/underscore.js'
+          vendor: 'bower_components/underscore/underscore.js'
         }
       }
     }
@@ -34,6 +34,6 @@ module.exports = function(grunt) {
 
   // Default task.
   grunt.registerTask('default', 'jshint');
-  grunt.registerTask('spec', 'jasmine-server');
+  grunt.registerTask('spec', 'jasmine');
   grunt.registerTask('build', ['jshint', 'clean', 'uglify']);
 };

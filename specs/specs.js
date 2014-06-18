@@ -46,6 +46,48 @@ describe("Underscore partials", function() {
 
         expect(template()).toBe("User rating: 4 stars (****)");
     });
+
+    describe("with template setting", function() {
+        beforeEach(function() {
+            templateSettings1 = {
+              interpolate: /<\@\=([\s\S]+?)\@\>/gim,
+              evaluate: /<\@([\s\S]+?)\@\>/gim
+            };
+            templateSettings2 = {
+              interpolate: /<\#\=([\s\S]+?)\#\>/gim,
+              evaluate: /<\@([\s\S]+?)\@\>/gim
+            };
+        });
+
+        it("can declare a new partial", function() {
+            var partial = "hello";
+            _.partial.declare("hello", partial, templateSettings1);
+            expect(_.partial("hello")).toBe("hello");
+        });
+
+        it("can overwrite an existing partial", function() {
+            var partial1 = "hello1 <@= name @>!";
+            var partial2 = "hello2 <#= name #>!";
+            _.partial.declare("hello", partial1, templateSettings1);
+            _.partial.declare("hello", partial2, templateSettings2);
+            expect(_.partial("hello", {name: "bob"})).toBe("hello2 bob!");
+        });
+
+        it("gives you the full power of Underscore templates in a partial", function(){
+            var partial = "Hello <@= name @>";
+            _.partial.declare("hello", partial, templateSettings1);
+            expect(_.partial("hello", {name: "bob"})).toBe("Hello bob");
+        });
+
+        it("let's you use a partial inside of a template", function(){
+            var partial = "<@= rating @> stars (<@ for(var i = 0; i < rating; i++) { @>*<@ } @>)";
+            var template = "User rating: <#= _.partial('star_rating', {rating: 4}) #>";
+            _.partial.declare('star_rating', partial, templateSettings1);
+            template = _.template(template, undefined, templateSettings2);
+
+            expect(template()).toBe("User rating: 4 stars (****)");
+        });
+    });
 });
 
 (function() {

@@ -1,30 +1,26 @@
-(function(){
-
+(function() {
     /**
      * Allow underscore use of partials
      */
-    _.mixin((function(){
-        var partialCache = {};
+    var partialCache = {};
 
-        var mixin = {
-            partial: function(name, data) {
-                return partialCache[name](data);
-            }
-        };
+    var partial = function(name, data) {
+        return partialCache[name](data);
+    };
 
-        mixin.partial.declare = function(name, template, templateSettings) {
-            partialCache[name] = _.template(template, undefined, templateSettings);
-        };
+    partial.declare = function(name, template, templateSettings) {
+        partialCache[name] = _.template(template, undefined, templateSettings);
+    };
 
-        mixin.partial.exists = function(name) {
-            return !_.isUndefined(partialCache[name]);
-        };
+    partial.exists = function(name) {
+        return _.isFunction(partialCache[name]);
+    };
 
-        mixin.partial.remove = function(name) {
-            delete partialCache[name];
-        };
+    partial.remove = function(name) {
+        delete partialCache[name];
+    };
 
-        return mixin;
-    })());
-
+    _.mixin({
+        partial: partial
+    });
 })();

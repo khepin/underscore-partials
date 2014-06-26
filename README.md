@@ -1,10 +1,9 @@
-Travis status: [![Build Status](https://travis-ci.org/khepin/underscore-partials.png?branch=master)](https://travis-ci.org/khepin/underscore-partials)
+# underscore-partials [![Build Status](https://api.travis-ci.org/khepin/underscore-partials.svg?branch=master)](https://travis-ci.org/khepin/underscore-partials)
 
-# Allows you to use partial templates within Underscore templates
+> Allows you to use partial templates within Underscore templates.
 
-This lets you define some templates that can be used within other templates.
-
-This is useful for small templates that need to be repeated in many places.
+It lets you define some templates that can be used within other templates
+which is useful for small templates that need to be repeated in many places.
 
 Example:
 ```html
@@ -36,6 +35,14 @@ Will output
 // Declare a partial
 _.partial.declare('partial_name', partialString);
 
+// Declare a partial with specific template settings
+_.partial.declare('partial_name', partialString, {
+  interpolate: ...,
+  evaluate: ...,
+  escape: ...,
+  data: ...
+});
+
 // Use a partial
 _.partial('partial_name');
 // or
@@ -53,11 +60,12 @@ _.partial.remove('partial_name');
 
 ## Setup the dependencies:
 
-    bower install underscore
-    bower install jasmine
+    npm install -g bower
+    bower install
 
 ## Setup Grunt
 
+    npm install -g grunt-cli
     npm install
 
 ## Run the test suite
@@ -66,4 +74,4 @@ _.partial.remove('partial_name');
 
 # Licence
 
-This software is released under the MIT open source licence
+This software is released under the MIT open source licence.

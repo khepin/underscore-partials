@@ -62,7 +62,7 @@ _.partial.remove('partial_name');
 
 ## Run the test suite
 
-    grunt jasmine
+    grunt test
 
 # Licence
 

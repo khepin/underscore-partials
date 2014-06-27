@@ -15,12 +15,12 @@ Example:
 
 <!-- main.tmpl -->
 <h1><%= product.name %></h1>
-<div><%= _.partial('star_rating', {rating: product.rating}) %></div>
+<div><%= _.template.partial('star_rating', {rating: product.rating}) %></div>
 ```
 
 ```javascript
 var template = _.template(main.tmpl);
-_.partial.declare('star_rating', star_rating.tmpl);
+_.template.partial.declare('star_rating', star_rating.tmpl);
 template({product: {name: "DVD Player", rating: 3}});
 ```
 
@@ -34,18 +34,18 @@ Will output
 
 ```javascript
 // Declare a partial
-_.partial.declare('partial_name', partialString);
+_.template.partial.declare('partial_name', partialString);
 
 // Use a partial
-_.partial('partial_name');
+_.template.partial('partial_name');
 // or
-_.partial('partial_name', partial_data);
+_.template.partial('partial_name', partial_data);
 
 // Check if a partial exists
-_.partial.exists('partial_name');
+_.template.partial.exists('partial_name');
 
 // Remove a partial that was declared before
-_.partial.remove('partial_name');
+_.template.partial.remove('partial_name');
 
 ```
 

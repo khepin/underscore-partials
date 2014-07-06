@@ -1,4 +1,6 @@
-(function() {
+(function(root) {
+    var _ = root._;
+
     /**
      * Allow underscore use of partials
      */
@@ -20,7 +22,6 @@
         delete partialCache[name];
     };
 
-    _.mixin({
-        partial: partial
-    });
-})();
+    // extend Underscore
+    _.template.partial = partial;
+})(this);

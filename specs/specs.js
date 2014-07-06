@@ -1,47 +1,47 @@
 describe("Underscore partials", function() {
     it("can declare a new partial", function() {
         var partial = "hello";
-        _.partial.declare("hello", partial);
-        expect(_.partial("hello")).toBe("hello");
+        _.template.partial.declare("hello", partial);
+        expect(_.template.partial("hello")).toBe("hello");
     });
 
     it("can overwrite an existing partial", function() {
         var partial = "hello";
         var new_partial = "hello mom!";
-        _.partial.declare("hello", partial);
-        _.partial.declare("hello", new_partial);
-        expect(_.partial("hello")).toBe("hello mom!");
+        _.template.partial.declare("hello", partial);
+        _.template.partial.declare("hello", new_partial);
+        expect(_.template.partial("hello")).toBe("hello mom!");
     });
 
     it("can tell you if a partial exists", function(){
         var partial = "hello";
-        _.partial.declare("hello", partial);
-        expect(_.partial.exists("hello")).toBe(true);
+        _.template.partial.declare("hello", partial);
+        expect(_.template.partial.exists("hello")).toBe(true);
     });
 
     it("can tell you if a partial does not exist", function(){
-        expect(_.partial.exists("this_partial_does_not_exist")).toBe(false);
+        expect(_.template.partial.exists("this_partial_does_not_exist")).toBe(false);
     });
 
     it("can remove a partial", function(){
         var partial = "hello";
-        _.partial.declare("hello", partial);
-        expect(_.partial.exists("hello")).toBe(true);
+        _.template.partial.declare("hello", partial);
+        expect(_.template.partial.exists("hello")).toBe(true);
 
-        _.partial.remove("hello");
-        expect(_.partial.exists("hello")).toBe(false);
+        _.template.partial.remove("hello");
+        expect(_.template.partial.exists("hello")).toBe(false);
     });
 
     it("gives you the full power of Underscore templates in a partial", function(){
         var partial = "Hello <%= name %>";
-        _.partial.declare("hello", partial);
-        expect(_.partial("hello", {name: "bob"})).toBe("Hello bob");
+        _.template.partial.declare("hello", partial);
+        expect(_.template.partial("hello", {name: "bob"})).toBe("Hello bob");
     });
 
     it("let's you use a partial inside of a template", function(){
-        var template = "User rating: <%= _.partial('star_rating', {rating: 4}) %>";
+        var template = "User rating: <%= _.template.partial('star_rating', {rating: 4}) %>";
         var partial = "<%= rating %> stars (<% for(var i = 0; i < rating; i++) { %>*<% } %>)";
-        _.partial.declare('star_rating', partial);
+        _.template.partial.declare('star_rating', partial);
         template = _.template(template);
 
         expect(template()).toBe("User rating: 4 stars (****)");
@@ -61,28 +61,28 @@ describe("Underscore partials", function() {
 
         it("can declare a new partial", function() {
             var partial = "hello";
-            _.partial.declare("hello", partial, templateSettings1);
-            expect(_.partial("hello")).toBe("hello");
+            _.template.partial.declare("hello", partial, templateSettings1);
+            expect(_.template.partial("hello")).toBe("hello");
         });
 
         it("can overwrite an existing partial", function() {
             var partial1 = "hello1 <@= name @>!";
             var partial2 = "hello2 <#= name #>!";
-            _.partial.declare("hello", partial1, templateSettings1);
-            _.partial.declare("hello", partial2, templateSettings2);
-            expect(_.partial("hello", {name: "bob"})).toBe("hello2 bob!");
+            _.template.partial.declare("hello", partial1, templateSettings1);
+            _.template.partial.declare("hello", partial2, templateSettings2);
+            expect(_.template.partial("hello", {name: "bob"})).toBe("hello2 bob!");
         });
 
         it("gives you the full power of Underscore templates in a partial", function(){
             var partial = "Hello <@= name @>";
-            _.partial.declare("hello", partial, templateSettings1);
-            expect(_.partial("hello", {name: "bob"})).toBe("Hello bob");
+            _.template.partial.declare("hello", partial, templateSettings1);
+            expect(_.template.partial("hello", {name: "bob"})).toBe("Hello bob");
         });
 
         it("let's you use a partial inside of a template", function(){
             var partial = "<@= rating @> stars (<@ for(var i = 0; i < rating; i++) { @>*<@ } @>)";
-            var template = "User rating: <#= _.partial('star_rating', {rating: 4}) #>";
-            _.partial.declare('star_rating', partial, templateSettings1);
+            var template = "User rating: <#= _.template.partial('star_rating', {rating: 4}) #>";
+            _.template.partial.declare('star_rating', partial, templateSettings1);
             template = _.template(template, undefined, templateSettings2);
 
             expect(template()).toBe("User rating: 4 stars (****)");

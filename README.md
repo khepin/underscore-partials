@@ -1,9 +1,6 @@
 # underscore-partials [![Build Status](https://api.travis-ci.org/khepin/underscore-partials.svg?branch=master)](https://travis-ci.org/khepin/underscore-partials)
 
-> Allows you to use partial templates within Underscore templates.
-
-It lets you define some templates that can be used within other templates
-which is useful for small templates that need to be repeated in many places.
+> underscore-partials lets you use templates within templates for abstraction and reuse.
 
 Example:
 ```html
@@ -36,7 +33,7 @@ Will output
 _.template.partial.declare('partial_name', partialString);
 
 // Declare a partial with specific template settings
-_.partial.declare('partial_name', partialString, {
+_.template.partial.declare('partial_name', partialString, {
   interpolate: ...,
   evaluate: ...,
   escape: ...,
@@ -58,7 +55,7 @@ _.template.partial.remove('partial_name');
 
 # Contributing
 
-## Setup the dependencies:
+## Setup the dependencies
 
     npm install -g bower
     bower install
